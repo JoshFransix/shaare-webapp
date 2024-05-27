@@ -8,35 +8,8 @@ import Checkbox from "@mui/material/Checkbox";
 
 function App() {
   const [activeOption, setActive] = useState("");
-  const [options, setOptions] = useState({
-    standardActive: true,
-    standardShow: true,
-    deepActive: true,
-    deepShow: true,
-    moveActive: true,
-    moveShow: true,
-  });
 
-  const hideDetails = () => {
-    let newoptions = { ...options };
-    newoptions.standardShow = false;
-    setOptions({ ...newoptions });
-    console.log(newoptions);
-    setTimeout(() => {
-      console.log(options);
-    }, 2000);
-  };
-  const updateOption = (checked, option) => {
-    if (checked === true) {
-      if (option === "standard") {
-        setOptions({ ...options, standardActive: true });
-      }
-      if (option === "deep") {
-        setOptions({ ...options, deepActive: true });
-      }
-    } else {
-      setOptions({ ...options, standardActive: false });
-    }
+  const updateOption = (option) => {
     setActive(option);
     console.log(option);
   };
@@ -75,122 +48,110 @@ function App() {
 
         <div>
           <div
-            onClick={() => setOptions({ ...options, standardActive: true })}
+            onClick={() => setActive("standard")}
             className={`mb-4 transition-element  px-2.5 py-3 border  rounded-xl ${
-              options.standardActive && "border-[#024751] transition-element"
+              activeOption === "standard" &&
+              "border-[#024751] transition-element"
             }`}
           >
             <div className="cursor-pointer flex items-center justify-between transition-element">
               <span>Standard Cleaning</span>{" "}
               <span>
-                <Checkbox
-                  checked={options.standardActive}
-                  size="small"
-                  onChange={(e) => updateOption(e.target.checked, "standard")}
-                />
+                <Checkbox size="small" />
               </span>
             </div>
-            {options.standardActive === true &&
-              options.standardShow === true && (
-                <div className="w-full">
-                  <h4
-                    onClick={hideDetails}
-                    className="cursor-pointer text-red-500 text-sm text-center my-3 flex justify-end"
-                  >
-                    Hide Details
-                  </h4>
+            {activeOption === "standard" && (
+              <div className="w-full">
+                <h4 className="text-red-500 text-sm text-center my-3 flex justify-end">
+                  Hide Details
+                </h4>
 
-                  <div className={`overflow-y-auto h-[400px] text-[#0F2730]`}>
-                    <div className="mb-2">
-                      <h3 className="font-semibold">BEDROOMS</h3>
-                      <ul className="list-disc pl-5 pt-2">
-                        <li>Dusting of furniture and surfaces</li>
-                        <li>Making bed</li>
-                        <li>Sweeping and/or mopping floors</li>
-                        <li>Dusting and wiping of skirtings</li>
-                        <li>
-                          Folding or hanging clothes on the bed or around the
-                          bedroom (This does not include wardrobe or closet
-                          reorganization)
-                        </li>
-                        <li>Cleaning Mirrors</li>
-                        <li>Cleaning out cobwebs</li>{" "}
-                      </ul>
-                    </div>
-                    <div className="mb-2">
-                      <h3 className="font-semibold">BATHROOMS</h3>
-                      <ul className="list-disc pl-5 pt-2">
-                        <li>Cleaning of shower, bath, and sinks</li>
-                        <li>Toilet clean</li>
-                        <li>Wiping of counters and taps</li>
-                        <li>Wiping of walls and mirrors</li>
-                        <li>Wiping outside of cupboards and cabinets</li>
-                        <li>Folding or hanging of clean towels</li>
-                        <li>Emptying bins and cleaning bin area</li>
-                        <li>Mopping floors</li>
-                        <li>Cleaning out cobwebs</li>
-                      </ul>
-                    </div>
-                    <div className="mb-2">
-                      <h3 className="font-semibold">LIVING ROOM</h3>
-                      <ul className="list-disc pl-5 pt-2">
-                        <li>The dusting of furniture and surfaces</li>
-                        <li>Mopping and sweeping of floors</li>
-                        <li>Dusting and wiping of skirtings</li>
-                        <li>
-                          Dusting and wiping of electronics, pictures frames
-                          etc.
-                        </li>
-                        <li>
-                          Dusting and wiping of light switches and other
-                          fixtures
-                        </li>
-                        <li>Cleaning Mirrors</li>
-                        <li>Cleaning out cobwebs</li>
-                      </ul>
-                    </div>
-                    <div className="mb-2">
-                      <h3 className="font-semibold">KITCHEN</h3>
-                      <ul className="list-disc pl-5 pt-2">
-                        <li>Wiping of surfaces, sinks, and appliances</li>
-                        <li>Washing of dishes</li>
-                        <li>Wiping outside of cupboards and fridge</li>
-                        <li>
-                          Cleaning the Stove top and the walls behind the stove
-                        </li>
-                        <li>Cleaning inside and outside of the microwave</li>
-                        <li>Wiping of walls</li>
-                        <li>Emptying bins and cleaning bin area</li>
-                        <li>Mopping floors</li>
-                        <li>Cleaning out cobwebs</li>
-                      </ul>
-                    </div>
-                    <h3 className="my-2">
-                      Cleaning of Staircases within the home is also covered.
-                    </h3>
-                    <h3 className="my-2">
-                      Homes significantly larger than other homes of the same
-                      size and bookings that run longer than the estimated
-                      booking hours might attract additional charges which will
-                      be duly communicated.
-                    </h3>
+                <div className={`overflow-y-auto h-[400px] text-[#0F2730]`}>
+                  <div className="mb-2">
+                    <h3 className="font-semibold">BEDROOMS</h3>
+                    <ul className="list-disc pl-5 pt-2">
+                      <li>Dusting of furniture and surfaces</li>
+                      <li>Making bed</li>
+                      <li>Sweeping and/or mopping floors</li>
+                      <li>Dusting and wiping of skirtings</li>
+                      <li>
+                        Folding or hanging clothes on the bed or around the
+                        bedroom (This does not include wardrobe or closet
+                        reorganization)
+                      </li>
+                      <li>Cleaning Mirrors</li>
+                      <li>Cleaning out cobwebs</li>{" "}
+                    </ul>
                   </div>
+                  <div className="mb-2">
+                    <h3 className="font-semibold">BATHROOMS</h3>
+                    <ul className="list-disc pl-5 pt-2">
+                      <li>Cleaning of shower, bath, and sinks</li>
+                      <li>Toilet clean</li>
+                      <li>Wiping of counters and taps</li>
+                      <li>Wiping of walls and mirrors</li>
+                      <li>Wiping outside of cupboards and cabinets</li>
+                      <li>Folding or hanging of clean towels</li>
+                      <li>Emptying bins and cleaning bin area</li>
+                      <li>Mopping floors</li>
+                      <li>Cleaning out cobwebs</li>
+                    </ul>
+                  </div>
+                  <div className="mb-2">
+                    <h3 className="font-semibold">LIVING ROOM</h3>
+                    <ul className="list-disc pl-5 pt-2">
+                      <li>The dusting of furniture and surfaces</li>
+                      <li>Mopping and sweeping of floors</li>
+                      <li>Dusting and wiping of skirtings</li>
+                      <li>
+                        Dusting and wiping of electronics, pictures frames etc.
+                      </li>
+                      <li>
+                        Dusting and wiping of light switches and other fixtures
+                      </li>
+                      <li>Cleaning Mirrors</li>
+                      <li>Cleaning out cobwebs</li>
+                    </ul>
+                  </div>
+                  <div className="mb-2">
+                    <h3 className="font-semibold">KITCHEN</h3>
+                    <ul className="list-disc pl-5 pt-2">
+                      <li>Wiping of surfaces, sinks, and appliances</li>
+                      <li>Washing of dishes</li>
+                      <li>Wiping outside of cupboards and fridge</li>
+                      <li>
+                        Cleaning the Stove top and the walls behind the stove
+                      </li>
+                      <li>Cleaning inside and outside of the microwave</li>
+                      <li>Wiping of walls</li>
+                      <li>Emptying bins and cleaning bin area</li>
+                      <li>Mopping floors</li>
+                      <li>Cleaning out cobwebs</li>
+                    </ul>
+                  </div>
+                  <h3 className="my-2">
+                    Cleaning of Staircases within the home is also covered.
+                  </h3>
+                  <h3 className="my-2">
+                    Homes significantly larger than other homes of the same size
+                    and bookings that run longer than the estimated booking
+                    hours might attract additional charges which will be duly
+                    communicated.
+                  </h3>
                 </div>
-              )}
+              </div>
+            )}
           </div>
           <div
-            onClick={() => setOptions({ ...options, deepActive: true })}
+            onClick={() => setActive("deep")}
             className={`mb-4 transition-element  px-2.5 py-3 border  rounded-xl ${
-              options.deepActive && "border-[#024751] transition-element"
+              activeOption === "deep" && "border-[#024751] transition-element"
             }`}
           >
             <div className="cursor-pointer flex items-center justify-between transition-element">
               <span>Deep Cleaning</span>{" "}
               <span>
-                <Checkbox
-                  size="small"
-                  onChange={() => updateOption("standard")}
-                />
+                <Checkbox size="small" />
               </span>
             </div>
             {activeOption === "deep" && (
@@ -285,10 +246,7 @@ function App() {
             <div className="cursor-pointer flex items-center justify-between transition-element">
               <span>Move-in Cleaning</span>{" "}
               <span>
-                <Checkbox
-                  size="small"
-                  onChange={() => updateOption("standard")}
-                />
+                <Checkbox size="small" />
               </span>
             </div>
             {activeOption === "move-in" && (
@@ -383,10 +341,7 @@ function App() {
             <div className="cursor-pointer flex items-center justify-between transition-element">
               <span>Ironing</span>{" "}
               <span>
-                <Checkbox
-                  size="small"
-                  onChange={() => updateOption("standard")}
-                />
+                <Checkbox size="small" />
               </span>
             </div>
             {activeOption === "ironing" && (
@@ -431,10 +386,7 @@ function App() {
             <div className="cursor-pointer flex items-center justify-between transition-element">
               <span>Laundry</span>{" "}
               <span>
-                <Checkbox
-                  size="small"
-                  onChange={() => updateOption("standard")}
-                />
+                <Checkbox size="small" />
               </span>
             </div>
           </div>
@@ -448,10 +400,7 @@ function App() {
             <div className="cursor-pointer flex items-center justify-between transition-element">
               <span>Wardrobe Organization</span>{" "}
               <span>
-                <Checkbox
-                  size="small"
-                  onChange={() => updateOption("standard")}
-                />
+                <Checkbox size="small" />
               </span>
             </div>
           </div>
